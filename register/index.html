@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register - Opini Job</title>
+    <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+    <main class="register-page">
+        <section class="register-card">
+            <div class="register-panel register-panel--form">
+                <div class="register-copy">
+                    <h1>Daftar Akun</h1>
+                    <p>Buat akun untuk dapat mengakses halaman dashboard Opini Job.</p>
+                </div>
+
+                <p class="form-alert" id="formAlert" hidden>Pendaftaran gagal. Silakan periksa kembali data Anda.</p>
+
+                <form id="registerForm" class="register-form">
+                    <div class="form-group">
+                        <label for="name">Nama lengkap</label>
+                        <input id="name" name="name" type="text" placeholder="Nama sesuai KTP" required />
+                        <small class="field-error" data-error-for="name"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input id="email" name="email" type="email" placeholder="nama@email.com" required />
+                        <small class="field-error" data-error-for="email"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password akun</label>
+                        <div class="password-field">
+                            <input id="password" name="password" type="password" required />
+                            <button type="button" class="ghost-button" data-toggle-password="#password">
+                                Tampilkan
+                            </button>
+                        </div>
+                        <ul class="password-checklist">
+                            <li data-rule="minLength">Minimal 8 karakter</li>
+                        </ul>
+                        <small class="field-error" data-error-for="password"></small>
+                    </div>
+
+                    <button type="submit" class="button button--primary button--block" id="submitRegister" disabled>
+                        Daftar
+                    </button>
+                </form>
+
+                <div class="separator"><span>Atau daftar dengan</span></div>
+
+                <button type="button" class="button button--outline button--block">Google</button>
+
+                <p class="auth-footer-text">
+                    Sudah punya akun?
+                    <a href="/login/index.html" class="text-link">Masuk</a>
+                </p>
+            </div>
+
+            <aside class="register-panel register-panel--visual">
+                <div class="brand-copy">
+                    <span class="brand-mark">OJ</span>
+                    <h2>Platform survei dan rekrutmen terpercaya</h2>
+                    <p>Mudah, cepat, aman, dan siap dipakai untuk kebutuhan client maupun talent.</p>
+                    <ul class="brand-benefits">
+                        <li>Mudah & Cepat</li>
+                        <li>Aman & Terpercaya</li>
+                        <li>Dukungan 24/7</li>
+                    </ul>
+                </div>
+            </aside>
+        </section>
+
+        <p class="legal-copy">
+            Dengan mendaftar, Anda menyetujui <a href="#">Ketentuan Layanan</a> dan
+            <a href="#">Kebijakan Privasi</a>.
+        </p>
+    </main>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>

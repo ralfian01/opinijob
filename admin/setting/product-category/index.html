@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin - Kategori Produk</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  <div class="admin-shell">
+    <aside class="sidebar">
+      <div class="sidebar__brand">Opini Job</div>
+      <nav class="sidebar__nav">
+        <a href="/admin/setting/product/index.html" class="sidebar__link">Setting Produk</a>
+        <a href="#" class="sidebar__link is-active">Kategori Produk</a>
+        <a href="/admin/setting/product-price/index.html" class="sidebar__link">Daftar Harga</a>
+      </nav>
+    </aside>
+
+    <div class="content-shell">
+      <header class="topbar">
+        <div>
+          <p class="topbar__eyebrow">Admin / Setting</p>
+          <h1>Kategori Produk</h1>
+        </div>
+        <div class="topbar__user">Admin</div>
+      </header>
+
+      <main class="content">
+        <section class="page-header">
+          <div>
+            <h2>Kategori Produk</h2>
+            <p>Kelola kategori produk untuk memudahkan pengelompokan.</p>
+          </div>
+          <button type="button" class="button button--primary" id="openCategoryModal">
+            Tambah Kategori
+          </button>
+        </section>
+
+        <section class="panel">
+          <form class="search-panel" id="categorySearchForm">
+            <input type="search" id="categorySearch" placeholder="Cari kategori..." />
+            <button type="submit" class="button button--primary">Cari</button>
+            <button type="button" class="button button--ghost" id="resetCategorySearch">Reset</button>
+          </form>
+        </section>
+
+        <section class="panel">
+          <div class="panel__title">
+            <p>Daftar Kategori</p>
+          </div>
+
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Nama</th>
+                  <th>Code</th>
+                  <th>Deskripsi</th>
+                  <th class="table-center">Produk</th>
+                  <th class="table-right">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="categoryTableBody">
+                <!-- <tr data-search="retail retail-store kategori toko retail riset kuantitatif">
+                  <td>Retail Store</td>
+                  <td><span class="badge">retail-store</span></td>
+                  <td>Kategori untuk observasi dan survei toko retail.</td>
+                  <td class="table-center"><span class="chip">Riset Kuantitatif</span></td>
+                  <td class="table-right">
+                    <button type="button" class="icon-button" data-edit-category>Ubah</button>
+                    <button type="button" class="icon-button icon-button--danger" data-delete-category>Hapus</button>
+                  </td>
+                </tr>
+                <tr data-search="komunitas komunitas-online kategori peserta komunitas fgd online">
+                  <td>Komunitas Online</td>
+                  <td><span class="badge">komunitas-online</span></td>
+                  <td>Kategori untuk peserta berbasis komunitas digital.</td>
+                  <td class="table-center"><span class="chip">FGD Online</span></td>
+                  <td class="table-right">
+                    <button type="button" class="icon-button" data-edit-category>Ubah</button>
+                    <button type="button" class="icon-button icon-button--danger" data-delete-category>Hapus</button>
+                  </td>
+                </tr>
+                <tr data-search="audit-outlet audit-outlet kategori audit lapangan audit lapangan">
+                  <td>Audit Outlet</td>
+                  <td><span class="badge">audit-outlet</span></td>
+                  <td>Kategori untuk kebutuhan audit toko dan pengecekan display.</td>
+                  <td class="table-center"><span class="chip">Audit Lapangan</span></td>
+                  <td class="table-right">
+                    <button type="button" class="icon-button" data-edit-category>Ubah</button>
+                    <button type="button" class="icon-button icon-button--danger" data-delete-category>Hapus</button>
+                  </td>
+                </tr> -->
+              </tbody>
+            </table>
+          </div>
+
+          <div class="pagination">
+            <p>Menampilkan x dari x kategori</p>
+            <div class="pagination__actions">
+              <button type="button" class="button button--outline" disabled>Sebelumnya</button>
+              <button type="button" class="button button--outline" disabled>Berikutnya</button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div class="modal" id="categoryModal" hidden>
+    <div class="modal__dialog">
+      <div class="modal__header">
+        <div>
+          <h3>Tambah Kategori</h3>
+          <p>Isi formulir untuk menambahkan kategori baru.</p>
+        </div>
+        <button type="button" class="modal__close" id="closeCategoryModal">×</button>
+      </div>
+
+      <form class="modal__form" id="categoryForm">
+        <div class="form-group">
+          <label for="categoryName">Nama Kategori</label>
+          <input id="categoryName" type="text" placeholder="Contoh: Elektronik" required />
+        </div>
+        <div class="form-group">
+          <label for="categoryCode">Slug</label>
+          <input id="categoryCode" type="text" placeholder="elektronik" required />
+        </div>
+        <div class="form-group">
+          <label for="categoryDescription">Deskripsi</label>
+          <textarea id="categoryDescription" rows="4" placeholder="Deskripsi kategori..."></textarea>
+        </div>
+        <div class="form-group">
+          <label for="categoryProduct">Produk dalam Kategori</label>
+          <select id="categoryProduct">
+            <option value="">Pilih produk...</option>
+            <option>Riset Kuantitatif</option>
+            <option>FGD Online</option>
+            <option>Audit Lapangan</option>
+          </select>
+          <small>Pilih produk utama yang termasuk dalam kategori ini.</small>
+        </div>
+
+        <div class="modal__footer">
+          <button type="button" class="button button--outline" id="cancelCategoryModal">Batal</button>
+          <button type="submit" class="button button--primary">Simpan Perubahan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+
+</html>
