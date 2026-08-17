@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin - Daftar Harga</title>
+  <link rel="stylesheet" href="/admin/setting/product-price/style.css" />
+</head>
+
+<body>
+  <div class="admin-shell">
+    <aside class="sidebar">
+      <div class="sidebar__brand">Opini Job</div>
+      <nav class="sidebar__nav">
+        <a href="/admin/setting/product/index.html" class="sidebar__link">Setting Produk</a>
+        <a href="/admin/setting/product-category/index.html" class="sidebar__link">Kategori Produk</a>
+        <a href="#" class="sidebar__link is-active">Daftar Harga</a>
+      </nav>
+    </aside>
+
+    <div class="content-shell">
+      <header class="topbar">
+        <div>
+          <p class="topbar__eyebrow">Admin / Setting</p>
+          <h1>Daftar Harga</h1>
+        </div>
+        <div class="topbar__user">Admin</div>
+      </header>
+
+      <main class="content">
+        <section class="page-header">
+          <div>
+            <h2>Daftar Harga</h2>
+            <p>Kelola harga berdasarkan kategori produk dan tipe layanan.</p>
+          </div>
+          <button type="button" class="button button--primary" id="openPriceModal">
+            Tambah Harga
+          </button>
+        </section>
+
+        <section class="panel">
+          <div class="filter-bar">
+            <div class="form-group">
+              <label for="priceCategoryFilter">Filter Kategori</label>
+              <select id="priceCategoryFilter">
+                <option value="">Semua kategori</option>
+                <option value="retail">Retail Store</option>
+                <option value="komunitas">Komunitas Online</option>
+                <option value="audit">Audit Outlet</option>
+              </select>
+            </div>
+            <div class="filter-actions">
+              <button type="button" class="button button--primary" id="applyPriceFilter">Terapkan Filter</button>
+              <button type="button" class="button button--ghost" id="resetPriceFilter">Reset</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel__title">
+            <p>Total 3 harga ditemukan</p>
+          </div>
+
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Produk</th>
+                  <th>Kategori</th>
+                  <th>Tipe Layanan</th>
+                  <th>Harga</th>
+                  <th>Unit</th>
+                  <th>Metode</th>
+                  <th>Tipe Unit</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="priceTableBody">
+                <tr data-category="retail">
+                  <td>1</td>
+                  <td>Riset Kuantitatif</td>
+                  <td>Retail Store</td>
+                  <td>Survey Outlet Basic</td>
+                  <td>Rp2.500.000 - Rp4.000.000</td>
+                  <td>per project</td>
+                  <td><span class="badge">OFFLINE</span></td>
+                  <td><span class="chip">GROUP</span></td>
+                  <td>
+                    <button type="button" class="icon-button" data-edit-price>Ubah</button>
+                    <button type="button" class="icon-button icon-button--danger" data-delete-price>Hapus</button>
+                  </td>
+                </tr>
+                <tr data-category="komunitas">
+                  <td>2</td>
+                  <td>FGD Online</td>
+                  <td>Komunitas Online</td>
+                  <td>FGD Online Basic</td>
+                  <td>Rp1.500.000 - Rp3.000.000</td>
+                  <td>per sesi</td>
+                  <td><span class="badge">ONLINE</span></td>
+                  <td><span class="chip">GROUP</span></td>
+                  <td>
+                    <button type="button" class="icon-button" data-edit-price>Ubah</button>
+                    <button type="button" class="icon-button icon-button--danger" data-delete-price>Hapus</button>
+                  </td>
+                </tr>
+                <tr data-category="audit">
+                  <td>3</td>
+                  <td>Audit Lapangan</td>
+                  <td>Audit Outlet</td>
+                  <td>Audit Display</td>
+                  <td>Rp800.000 - Rp1.500.000</td>
+                  <td>per outlet</td>
+                  <td><span class="badge">HYBRID</span></td>
+                  <td><span class="chip">INDIVIDUAL</span></td>
+                  <td>
+                    <button type="button" class="icon-button" data-edit-price>Ubah</button>
+                    <button type="button" class="icon-button icon-button--danger" data-delete-price>Hapus</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="pagination">
+            <p>Menampilkan 3 dari 3 data</p>
+            <div class="pagination__actions">
+              <button type="button" class="button button--outline" disabled>Sebelumnya</button>
+              <button type="button" class="button button--outline" disabled>Berikutnya</button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div class="modal" id="priceModal" hidden>
+    <div class="modal__dialog modal__dialog--wide">
+      <div class="modal__header">
+        <div>
+          <h3>Tambah Harga</h3>
+          <p>Isi formulir untuk menambahkan harga baru.</p>
+        </div>
+        <button type="button" class="modal__close" id="closePriceModal">×</button>
+      </div>
+
+      <form class="modal__form" id="priceForm">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="modalProduct">Produk</label>
+            <select id="modalProduct">
+              <option value="">Pilih produk terlebih dahulu</option>
+              <option value="riset">Riset Kuantitatif</option>
+              <option value="fgd">FGD Online</option>
+              <option value="audit">Audit Lapangan</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="modalCategory">Kategori Produk</label>
+            <select id="modalCategory">
+              <option value="">Pilih kategori</option>
+              <option value="retail">Retail Store</option>
+              <option value="komunitas">Komunitas Online</option>
+              <option value="audit">Audit Outlet</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="serviceType">Tipe Layanan</label>
+          <input id="serviceType" type="text" placeholder="Contoh: FGD Online Basic" required />
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="priceMin">Harga Minimal</label>
+            <input id="priceMin" type="number" placeholder="2500000" required />
+          </div>
+          <div class="form-group">
+            <label for="priceMax">Harga Maksimal</label>
+            <input id="priceMax" type="number" placeholder="4000000" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="unit">Unit</label>
+          <input id="unit" type="text" placeholder="per project, per jam, dll." required />
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="method">Metode</label>
+            <select id="method">
+              <option>ONLINE</option>
+              <option>OFFLINE</option>
+              <option>HYBRID</option>
+              <option>KIOSK</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="unitType">Tipe Unit</label>
+            <select id="unitType">
+              <option>GROUP</option>
+              <option>INDIVIDUAL</option>
+              <option>PER_PARTICIPANT</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="priceDetails">Detail (JSON, opsional)</label>
+          <textarea id="priceDetails" rows="5" placeholder='{"method":"Online","duration":"60-90 menit"}'></textarea>
+          <small>Masukkan data dalam format JSON yang valid.</small>
+        </div>
+
+        <div class="modal__footer">
+          <button type="button" class="button button--outline" id="cancelPriceModal">Batal</button>
+          <button type="submit" class="button button--primary">Simpan Perubahan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/admin/setting/product-price/script.js"></script>
+</body>
+
+</html>
